@@ -12,6 +12,7 @@ export default class ContactDetails extends React.Component {
 
     this.handleToggle = this.handleToggle.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.handleKeyPress = this.handleKeyPress.bind(this);
   }
 
   handleToggle() {
@@ -29,21 +30,22 @@ export default class ContactDetails extends React.Component {
     });
   }
 
+  // 수정
   handleChange(e) {
     let nextState={};
     nextState[e.target.name] = e.target.value;
     this.setState(nextState);
   }
 
+  // Enter Key 눌렀을 때
+  handleKeyPress(e) {
+    if(e.charCode == 13) {
+      this.handleToggle();
+    }
+  }
+
 
   render() {
-    const read = (
-      <div>
-        <p>{this.props.contact.name}</p>
-        <p>{this.props.contact.phone}</p>
-      </div>
-    );
-
     const edit = (
       <div>
         <p>
@@ -52,8 +54,16 @@ export default class ContactDetails extends React.Component {
         </p>
         <p>
           <input type="text" name="phone" placeholder="phone"
-                 value={this.state.phone} onChange={this.handleChange}/>
+                 value={this.state.phone} onChange={this.handleChange}
+                 onKeyPress={this.handleKeyPress}/>
         </p>
+      </div>
+    );
+
+    const read = (
+      <div>
+        <p>{this.props.contact.name}</p>
+        <p>{this.props.contact.phone}</p>
       </div>
     );
 
