@@ -68,7 +68,8 @@ export default class Contact extends React.Component {
       contactData: update(
         this.state.contactData,
         {$splice: [[this.state.selectedKey, 1]] }
-      )
+      ),
+      selectedKey: -1 // 현재 선택중인 것을 무효화
     });
   }
 
@@ -113,6 +114,8 @@ export default class Contact extends React.Component {
         <ContactDetails
               contact={this.state.contactData[this.state.selectedKey]}
               isSelected={this.state.selectedKey != -1}
+              onRemove={this.handleRemove}
+              onEdit={this.handleEdit}
         />
         <ContactCreate onCreate={this.handleCreate}/>
       </div>
